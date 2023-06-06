@@ -1,0 +1,33 @@
+---
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: install java package
+      yum:
+        name: java
+        state: present
+      when: ansible_os_family== "RedHat"
+    - name: install java package
+      yum:
+        name: default-jdk
+        state: latest
+      when: ansible_os_family== "Debian"
+    - name: download tomcat software
+      get_url:
+        url: https://downloads.apache.org/tomcat/tomcat-10/v10.1.9/bin/apache-tomcat-10.1.9.tar.gz.asc
+        dest: /opt
+    - name: extract tomcat software
+      unarchive:
+        src: /opt/apache-tomcat-10.1.9.tar.gz
+        dest: /opt/bin
+        remote_src: yes
+    - name: providing executable permissions
+      file:
+        path: /opt/apache-tomcat-10.1.9/bin/startup.sh
+        mode: 0777
+    - name: start tomcat service
+      shell: nohup./startup.sh
+      args:
+        chdir: /opt/apache-tomcat-10.1.9/bin

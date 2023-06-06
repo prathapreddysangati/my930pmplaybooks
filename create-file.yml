@@ -1,0 +1,12 @@
+---
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: create a file
+      file:
+       path: /home/ansible/job file
+       state: touch
+
+

@@ -1,0 +1,8 @@
+--- # installing a package
+- hosts: webservers[0]
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: install a package into host machine
+      action: yum name=docker state=present

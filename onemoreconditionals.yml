@@ -1,0 +1,31 @@
+---
+- hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: install httpd package
+      yum:
+        name: httpd
+        status: present
+    - name: start the httpd package
+      service:
+        name: httpd
+        status: started
+    - name: install apache2 package
+      apt:
+        name: apache2
+        state: present
+      when: ansible_os_family == "Debian"
+    - name: start apache2 service
+      service:
+        name: apache2
+        status: started
+      when: ansible_os_family == "Debian"
+    - name: copy index.html file
+      copy:
+       src: /home/ansible/index.html
+       dest: /var/www/html
+       owner: spreddy
+       mode: 0777
+

@@ -1,0 +1,11 @@
+---
+- name: my sample playbook
+  hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: install httpd package
+      yum:
+        name: httpd
+        state: present

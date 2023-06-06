@@ -1,0 +1,8 @@
+---
+- hosts: webservers[0]
+  user: ansible
+  become: true
+  connection: ssh
+  tasks:
+    - name: removing package from host1
+      action: yum name=docker state=absent

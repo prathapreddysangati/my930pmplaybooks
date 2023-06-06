@@ -1,0 +1,11 @@
+---
+- name: creating a folder
+  hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: creatin g a directory
+      file:
+        path: /home/ansible/abc1234xyz
+        state: directory

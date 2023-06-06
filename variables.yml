@@ -1,0 +1,10 @@
+---
+- hosts: all
+  user: ansible
+  become: true
+  connection: ssh
+  vars:
+    user: sunny
+  tasks:
+    - name: creating a user
+      user: name='{{user}}' state=present

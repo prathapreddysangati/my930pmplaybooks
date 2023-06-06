@@ -1,0 +1,2 @@
+- name: installimg httpd packsge into hosts
+  yum: pkg=httpd state=latest

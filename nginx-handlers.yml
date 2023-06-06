@@ -1,0 +1,12 @@
+---
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: install nginx
+      action: yum name=nginx state=present
+      notify: start nginx service
+  handlers:
+    - name: start nginx
+      action: service  name=nginx state=started

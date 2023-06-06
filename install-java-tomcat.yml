@@ -1,0 +1,28 @@
+---
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: install java package on redhat
+      yum:
+        name: java
+        state: present
+      when: ansible_os_family=="RedHat"
+    - name: download tomcat software
+      ansible.builtin.get_url:
+        url: https://downloads.apache.org/tomcat/tomcat-9/v9.0.75/bin/apache-tomcat-9.0.75.tar.gz.sha512
+        dest: /opt
+    - name: extract tomcat software
+      ansible.builtin.unarchive:
+        src: /opt/apache-tomcat-9.0.75.tar.gz.sha512
+        dest: /opt
+        remote_src: yes
+    - name: providing executable permissions
+      file:
+        path: /opt/apache-tomcat-9.0.75/bin/startup.sh
+        mode: 0777
+    - name: start tomcat service
+      shell: nohup./startup.sh
+      args:
+        chdir: /opt/apache-tomcat-9.0.75/bin

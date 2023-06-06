@@ -1,0 +1,25 @@
+---
+- hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: install java package on redhat
+      yum:
+        name: default-jdk
+        state: latest 
+      when: ansible_os_family== "RedHat"
+    - name: install java package on debian family
+      yum:
+        name: default-jdk
+        state: present
+      when: ansible_os_family== "Debian"
+    - name:  
+
+
+
+
+
+
+
+

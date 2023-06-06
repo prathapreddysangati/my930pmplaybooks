@@ -1,0 +1,22 @@
+--- # sample playbook
+- name: my first sample playbook
+  hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: installing httpd package
+      yum:
+        name: httpd
+        status: installed
+
+
+
+
+
+
+
+
+
+
+

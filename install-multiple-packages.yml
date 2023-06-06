@@ -1,0 +1,13 @@
+---
+- name: my loops playbook
+  hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: install packages
+      yum:
+        name: ['git','which','docker',;mysql','tree','httpd','java']
+        state: installed
+
+

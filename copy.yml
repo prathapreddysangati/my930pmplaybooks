@@ -1,0 +1,13 @@
+---
+- name: my copy playbook
+  hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: copy a file from server to hosts
+      copy:
+        src: /home/ansible/hari.html
+        dest: /home/ansible
+        owner: manohar
+        mode: 0777

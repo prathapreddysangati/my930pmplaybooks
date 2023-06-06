@@ -1,0 +1,9 @@
+--- # create auser
+- name: my user playbook
+  hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+  - name: creating a user
+    user: name=rohith

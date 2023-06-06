@@ -1,0 +1,13 @@
+--- # install tree package
+- name: my tree package
+  hosts: webservers
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+    - name: installing tree software in webservers
+      yum:
+        name: tree
+        state: installed
+
+
